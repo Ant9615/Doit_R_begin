@@ -45,3 +45,26 @@ ageg_marriage <- welfare %>%
   summarise(n=n()) %>% 
   mutate(t_group=sum(n)) %>% 
   mutate(pct=round(n/t_group*100, 1))
+ageg_marriage
+
+#연령대별 이혼율 그래프 
+ageg_divorce <- ageg_marriage %>% 
+  filter(ageg != "young" & g_marriage == "divorce") %>% 
+  select(ageg, pct)
+ageg_divorce
+ggplot(data = ageg_divorce, aes(x=ageg, y=pct)) + geom_col()
+
+#연령대 및 종교유무에 따른 이혼율 표
+ageg_re_ma <- welfare %>% 
+  filter(!is.na(g_marriage) & ageg !="young") %>% 
+  group_by(ageg, religion, g_marriage) %>% 
+  summarise(n=n()) %>% 
+  mutate(t_group=sum(n)) %>% 
+  mutate(pct = round(n/t_group*100, 1))
+ageg_re_ma
+
+#연령대 및 종교 유무별 이혼률 표
+df_divorce <- ageg_re_ma %>% 
+  filter(g_marriage == "divorce") %>% 
+  select(ageg, religion, pct)
+df_divorce
