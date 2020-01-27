@@ -24,3 +24,4 @@ ggChoropleth(data = crime,
              map=state_map,
              interactive = T)
 
+
