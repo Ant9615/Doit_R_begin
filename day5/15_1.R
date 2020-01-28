@@ -17,7 +17,7 @@ ex[1,]
 ex[ex$class==1,] ##class가 1인 행 추출 
 ex[ex$math>=60, ] ##수학점수가 60점 이상인 행 추출 
 ex[ex$class==1 & ex$math>=60, ] ##1반이면서 수학점수가 60점 이상인 행 
-ex[ex$english < 80 | ex$science >60, ] #영어점수가 80미만이거나 과학점수가 60 초과인 행행
+ex[ex$english < 80 | ex$science >60, ] #영어점수가 80미만이거나 과학점수가 60 초과인 행
 
 
 ##열추출 
