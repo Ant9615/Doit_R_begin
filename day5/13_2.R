@@ -10,7 +10,7 @@ library(corrplot)
 eco <- as.data.frame(ggplot2::economics)
 
 #상관분석
-cor.test(eco$unemploy, eco$pce)
+cor.test(eco$unemploy, eco$pce, method = 'spearman')
 
 #상관행렬 히트맵 생성
 head(mtcars)

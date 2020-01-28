@@ -1,0 +1,50 @@
+---
+title: "T-test"
+author: "IEant"
+date: '2020 1 28 '
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## t-test
+
+두 집단의 평균을 비교하는 것을 t-test라고 하고 세집단 이상을 비교할 때 F-test를 이용한다(분산비교). t-test의 차이가 유의하기 위해서는 차이 값이 커야하고, 표준편차가 작으며, 표본크기가 충분히 커야한다. 
+
+유의값(P-value)은 0.05보다 미만이면 집단 간 차이가 유의하다.
+
+#### library 로드
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+
+#### 데이터 load
+```{r}
+mpg<-as.data.frame(ggplot2::mpg)
+```
+#### class, cty만 선택 후, class 변수 중 compact, suv만 남김
+```{r}
+mpg_t <- mpg %>% 
+  select(class, cty) %>% 
+  filter(class %in% c("compact", "suv"))
+```
+
+```{r}
+head(mpg_t)
+```
+
+```{r}
+table(mpg_t$class)
+```
+
+#### t-test
+```{r}
+t.test(data=mpg_t, cty~class, var.equal=T)
+```
+
+위 결과를 보면 p-value가 2.2e-16이므로 통계적으로 유의하며 compact집단의 평균이 suv집단 보다 크므로 compact의 도시연비 평균이 suv의 도시연비 평균보다 크다는 것을 알 수 있다.
