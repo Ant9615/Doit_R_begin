@@ -38,5 +38,18 @@ mpg_b[c(10,14,58,93),"drv"] <- "NA"
 mpg_b[c(29,43,129,203),"cty"] <- c(3,4,39,42)
 
 #Q1
-table(is.na(mpg_b)) #왜 결측값 할당이 안되는거지?
+table(mpg_b$drv) 
+mpg_b$drv<- ifelse(mpg_b$drv %in% c("4","f","r"), mpg_b$drv, NA)
+table(mpg_b$drv)
 
+#Q2
+boxplot(mpg_b$cty)
+summary(mpg_b$cty)
+mpg_b$cty <- ifelse(mpg_b$cty<14 | mpg_b$cty>19, NA, mpg_b$cty)
+boxplot(mpg_b$cty)
+
+#Q3
+mpg_b %>%  
+    filter(!is.na(cty) & !is.na(drv)) %>% 
+    group_by(drv) %>% 
+    summarise(m_cty=mean(cty))
